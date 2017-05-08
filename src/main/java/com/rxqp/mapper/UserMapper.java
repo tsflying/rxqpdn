@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
-import com.rxqp.entity.User;
+import com.rxqp.entity.bo.User;
 
 public interface UserMapper {
 	@Select("select * from user where name = #{name}")

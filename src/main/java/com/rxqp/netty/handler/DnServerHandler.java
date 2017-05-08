@@ -1,5 +1,9 @@
 package com.rxqp.netty.handler;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -7,6 +11,7 @@ import com.rxqp.biz.ICoreBiz;
 import com.rxqp.biz.impl.CoreBizImpl;
 import com.rxqp.protobuf.DdzProto;
 
+@Component
 public class DnServerHandler extends ChannelInboundHandlerAdapter {
 
 	// 牌桌ID与该牌桌玩家通道集合的映射
@@ -16,14 +21,15 @@ public class DnServerHandler extends ChannelInboundHandlerAdapter {
 	// private static Map<Integer, Integer> channelIdToGroupId = new
 	// ConcurrentHashMap<Integer, Integer>();
 
-	private ICoreBiz ICoreBiz = new CoreBizImpl();
+	@Autowired
+	private CoreBizImpl coreBiz = new CoreBizImpl();
 
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
 		DdzProto.MessageInfo req = (DdzProto.MessageInfo) msg;
 		System.out.println("=====req:" + req.toString());
 		try {
-			DdzProto.MessageInfo mi = ICoreBiz.process(req, ctx);
+			DdzProto.MessageInfo mi = coreBiz.process(req, ctx);
 			if (mi != null)
 				ctx.writeAndFlush(mi);
 		} catch (Exception e) {

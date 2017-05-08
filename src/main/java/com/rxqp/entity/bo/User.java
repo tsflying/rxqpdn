@@ -1,4 +1,4 @@
-package com.rxqp.entity;
+package com.rxqp.entity.bo;
 
 public class User {
 

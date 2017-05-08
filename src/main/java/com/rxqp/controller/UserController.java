@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rxqp.entity.User;
-import com.rxqp.service.UserService;
+import com.rxqp.entity.bo.User;
+import com.rxqp.service.impl.UserService;
 
 @RestController
 public class UserController {
